@@ -1,7 +1,7 @@
 package Text::TWikiFormat::SAX;
 use base 'XML::SAX::Base';
 
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 use strict;
 use XML::SAX::DocumentLocator;
