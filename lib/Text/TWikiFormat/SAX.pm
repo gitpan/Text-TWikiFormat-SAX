@@ -1,7 +1,7 @@
 package Text::TWikiFormat::SAX;
 use base 'XML::SAX::Base';
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 use strict;
 use XML::SAX::DocumentLocator;
@@ -16,7 +16,7 @@ sub new {
 
 sub _parse_bytestream {
     my ($self, $fh) = @_;
-    my $parser = Wiki::SAX::Parser->new($self->{_onlink});
+    my $parser = TWiki::SAX::Parser->new($self->{_onlink});
     $parser->set_parent($self);
     local $/;
     my $text = <$fh>;
@@ -30,14 +30,14 @@ sub _parse_characterstream {
 
 sub _parse_string {
     my ($self, $str) = @_;
-    my $parser = Wiki::SAX::Parser->new($self->{_onlink});
+    my $parser = TWiki::SAX::Parser->new($self->{_onlink});
     $parser->set_parent($self);
     $parser->parse($str);
 }
 
 sub _parse_systemid {
     my ($self, $sysid) = @_;
-    my $parser = Wiki::SAX::Parser->new($self->{_onlink});
+    my $parser = TWiki::SAX::Parser->new($self->{_onlink});
     $parser->set_parent($self);
     open(FILE, $sysid) || die "Can't open $sysid: $!";
     local $/;
@@ -46,7 +46,7 @@ sub _parse_systemid {
 }
 
 
-package Wiki::SAX::Parser;
+package TWiki::SAX::Parser;
 use XML::SAX::Writer;
 use HTML::Parser;
 use strict;
